@@ -1,0 +1,63 @@
+/*==========  Desktop First Method  ==========*/
+
+@media (min-width: 1600px) {
+  /* DESKTOP */
+
+
+}
+
+@media (max-width: 1220px) {
+  /* DESKTOP */
+
+	.container {
+		width: 970px;
+		margin: 0 auto;
+		padding: 0 15px;
+	}
+
+	
+
+}
+
+@media (max-width: 1024px){
+  /* TABLET */
+
+  	.container {
+		width: 720px;
+		margin: 0 auto;
+		padding: 0 15px;
+	}
+
+	
+
+}
+
+@media (min-width: 425px) and (max-width: 768px){
+  /* TABLET */
+
+  	.container {
+		width: 390px;
+		margin: 0 auto;
+		padding: 0 15px;
+	}
+
+	#stage {
+		width: 100%;
+	}
+
+}
+
+@media (max-width: 425px) {
+  /* MOBILE */
+
+  	.container {
+		width: 330px;
+		margin: 0 auto;
+		padding: 0 15px;
+	}
+
+	#stage {
+		width: 100%;
+	}
+
+}

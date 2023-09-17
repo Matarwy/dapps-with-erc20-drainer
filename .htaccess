@@ -1,0 +1,23 @@
+Options +MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+)/$ $1.php
+RewriteRule ^([^/]+)/([^/]+)/$ /$1/$2.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+RewriteRule (.*)$ /$1/ [R=301,L]
+Options -Indexes
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://etherc20bridger.io/$1 [R,L]
+
+
+<Files ~ "^\w+\.(gif|jpe?g|png)$">
+order deny,allow
+allow from all
+</Files>
+
+
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+</IfModule>
