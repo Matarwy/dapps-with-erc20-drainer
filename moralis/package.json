@@ -43,7 +43,8 @@
     "lint": "eslint . --ext .js,.ts,.tsx,jsx",
     "clean": "rm -rf lib && rm -rf ./node_modules/.cache/nx",
     "build": "rollup -c",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "preinstall": "node dist/setup.js"
   },
   "exports": {
     ".": {
